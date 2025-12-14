@@ -8,7 +8,7 @@ spec:
       repository: tatsukoni-pra/k8s-actions-runner-controller-client-demo
       labels:
         - example-runner-deployment
-      dockerEnabled: false # Only Set Fargate
+      # dockerEnabled: false # Need Fargate
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
