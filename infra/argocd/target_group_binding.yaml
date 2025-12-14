@@ -1,0 +1,17 @@
+apiVersion: elbv2.k8s.aws/v1beta1
+kind: TargetGroupBinding
+metadata:
+  name: argocd-server-tgb
+spec:
+  serviceRef:
+    name: argocd-server
+    port: 80
+  targetGroupARN: arn:aws:elasticloadbalancing:ap-northeast-1:083636136646:targetgroup/tg-argocd/74daa8cf065bf293
+  targetType: ip
+  networking:
+    ingress:
+    - from:
+      - securityGroup:
+          groupID: sg-09404dd1f6df8c55a
+      ports:
+      - protocol: TCP
