@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: actions-runner-controller
+spec:
+  project: github-actions
+  sources:
+  - repoURL: https://actions-runner-controller.github.io/actions-runner-controller
+    chart: actions-runner-controller
+    targetRevision: 0.23.7
+    helm:
+      valueFiles:
+      - $values/infra/github-actions/values.yaml
+  - repoURL: 'https://github.com/tatsukoni-pra/k8s-actions-runner-controller-demo'
+    targetRevision: main
+    ref: values
+  - repoURL: 'https://github.com/tatsukoni-pra/k8s-actions-runner-controller-demo'
+    path: infra/github-actions
+    targetRevision: main
+  destination:
+    namespace: github-actions
+    server: "https://kubernetes.default.svc"
+  ignoreDifferences:
+  - group: apiextensions.k8s.io
+    kind: CustomResourceDefinition
+    jsonPointers:
+      - /spec/preserveUnknownFields
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true

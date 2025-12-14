@@ -1,0 +1,2 @@
+authSecret:
+  name: github-actions-runner-secret

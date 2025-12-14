@@ -6,5 +6,6 @@ resources:
   - argocd-app
   - external-secrets
   - cert-manager
+  - github-actions
 
 namespace: argocd
